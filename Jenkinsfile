@@ -1,10 +1,3 @@
-pipeline {
-    agent any 
-    stages {
-        stage ('installing apache on apache-web server') {
-            steps {
-                ansiblePlaybook credentialsId: 'AWS-SSH-KEY', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'hosts.inv', playbook: 'apache.yml'
-              }
-        }
-    }
-}
+@Library("jenkins-prod-shared-library") _
+
+ansible(apachehost:"hosts.inv", apachefile:"apache.yml")
